@@ -7,21 +7,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using System.Threading;
 namespace Project1
 {
-    public partial class Form1 : Form
+    public partial class FormSplashScreen : Form
     {
-        public Form1()
+        public FormSplashScreen()
         {
-            //Подключаем Базу Данных PostgreSQL
-
             InitializeComponent();
         }
-
-        private void Form1_Load(object sender, EventArgs e)
+        private void Timer1_Tick(object sender, EventArgs e)
         {
-            
+            progressBar1.Increment(1);
+            if (progressBar1.Value == 100) timer1.Stop();
         }
     }
 }
