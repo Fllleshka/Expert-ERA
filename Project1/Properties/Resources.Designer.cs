@@ -63,9 +63,9 @@ namespace Project1.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap gerb_ministerstva_oborony {
+        internal static System.Drawing.Bitmap Gerb_BAC {
             get {
-                object obj = ResourceManager.GetObject("gerb_ministerstva_oborony", resourceCulture);
+                object obj = ResourceManager.GetObject("Gerb_BAC", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -73,9 +73,9 @@ namespace Project1.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap gerb_VAS {
+        internal static System.Drawing.Bitmap Gerb_BAC1 {
             get {
-                object obj = ResourceManager.GetObject("gerb_VAS", resourceCulture);
+                object obj = ResourceManager.GetObject("Gerb_BAC1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

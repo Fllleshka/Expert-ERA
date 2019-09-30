@@ -14,33 +14,44 @@ namespace Project1
 {
     public partial class MainForm : Form
     {
+        // Глобальная переменная для подключения к БД.
+        String connectionString = "Server=localhost;Port=5432;User Id=postgres;Password=1q2w3e4r;Database=Expert_ERA;";
+
         public MainForm()
         {
             InitializeComponent();
         }
         // Функция проверки Логина и пароля
-        static bool Check_pass(string Login, string Pass)
+        bool Check_pass(string Login, string Pass)
         {
-            if (Login == "admin")
+            // Подключаем Базу Данных PostgreSQL через Npgsql
+            NpgsqlConnection npgSqlConnection = new NpgsqlConnection(connectionString);
+            npgSqlConnection.Open();
+
+            // Строка для выявления роли пользователя
+            string check_login_pass = "SELECT COUNT(*) FROM Login_in WHERE Login_in.Login = '" + Login + "' AND Login_in.Password = '" + Pass + "';";
+            // Выполняем запрос к Базе Данных
+            NpgsqlCommand npgSqlCommand = new NpgsqlCommand(check_login_pass, npgSqlConnection);
+            // Записываем ответ в переменную.
+            string check_result = npgSqlCommand.ExecuteScalar().ToString();
+            // Выполяем преобразование переменной в тип boolean
+ 
+            if (check_result == "1")
             {
-                if (Pass == "admin")
-                {
-                    return true;
-                }
-                else
-                    return false;
+                return true;
             }
             else
+            { 
                 return false;
+            }
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        public void Form1_Load(object sender, EventArgs e)
         {
             // При введении пароля он будет отображаться "звёздочками"
             textBox2.UseSystemPasswordChar = true;
 
             // Подключаем Базу Данных PostgreSQL через Npgsql
-            String connectionString = "Server=localhost;Port=5432;User Id=postgres;Password=1q2w3e4r;Database=123;";
             NpgsqlConnection npgSqlConnection = new NpgsqlConnection(connectionString);
             // Открываем соединение с Базой данных
             try
@@ -54,6 +65,7 @@ namespace Project1
                 linkLabel1.BackColor = Color.Red;
                 MessageBox.Show("Подключение отсутствует!", "Ошибка");
             }
+
         }
 
         private void Button1_Click(object sender, EventArgs e)
@@ -68,7 +80,7 @@ namespace Project1
             if (Checker == true)
             {
                 // Запускаем экран загрузки. 
-                Thread t = new Thread(new ThreadStart(StartSplashScreen));
+                Thread t = new Thread(() => StartSplashScreen(Login_textbox1, Password_textbox1));
                 t.Start();
                 Thread.Sleep(5000);
                 t.Abort();
@@ -84,15 +96,37 @@ namespace Project1
 
 
         }
-        public void StartSplashScreen()
+        public void StartSplashScreen(string Login_textbox1, string Password_textbox1)
         {
+            string Access_level;
             Application.Run(new FormSplashScreen());
+
+            // Проверяем уровень допуска пользователя
+            string sqlcheck = "SELECT Login_in.Access_level FROM Login_in WHERE Login_in.Login = " + Login_textbox1 + " AND Login_in.Password = " + Password_textbox1 + ";";
+
+            Access_level = "administrator";
+
+            // В соответствии с уровнем допуска запускаем определённую форму
+            switch(Access_level)
+            {
+                // Открываем форму Администратора
+                case "administrator":
+                    MessageBox.Show("Тут должна вывестись форма администратора.");
+                    break;
+                case "user":
+                    MessageBox.Show("Тут должна вывестись форма пользователя системы.");
+                    break;
+                default:
+                    MessageBox.Show("Ваш статус в системе не установлен. Обратитесь к администратору.");
+                    break;
+
+
+            }
         }
 
-        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
+        public void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             // При закрытии формы закрываем соединение с Базой Данных.
-            String connectionString = "Server=localhost;Port=5432;User Id=postgres;Password=1q2w3e5r;Database=123;";
             NpgsqlConnection npgSqlConnection = new NpgsqlConnection(connectionString);
             // Закрываем соединение с Базой данных
             npgSqlConnection.Close();

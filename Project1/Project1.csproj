@@ -113,13 +113,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\gnummemainphoto.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\gerb_ministerstva_oborony.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\gerb_VAS.jpg" />
+    <None Include="Resources\Gerb_BAC.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
