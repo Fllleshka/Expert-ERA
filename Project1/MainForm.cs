@@ -27,15 +27,18 @@ namespace Project1
             // Подключаем Базу Данных PostgreSQL через Npgsql
             NpgsqlConnection npgSqlConnection = new NpgsqlConnection(connectionString);
             npgSqlConnection.Open();
-
+            
             // Строка для выявления роли пользователя
             string check_login_pass = "SELECT COUNT(*) FROM Login_in WHERE Login_in.Login = '" + Login + "' AND Login_in.Password = '" + Pass + "';";
             // Выполняем запрос к Базе Данных
             NpgsqlCommand npgSqlCommand = new NpgsqlCommand(check_login_pass, npgSqlConnection);
             // Записываем ответ в переменную.
             string check_result = npgSqlCommand.ExecuteScalar().ToString();
-            // Выполяем преобразование переменной в тип boolean
- 
+            
+            // Закрываем соединение с Базой Данных
+            npgSqlConnection.Close();
+
+            // Проверяем на корректность данных
             if (check_result == "1")
             {
                 return true;
@@ -73,17 +76,14 @@ namespace Project1
             // При нажатии на кнопку выполняется проверка логина и пароля.
             string Login_textbox1 = textBox1.Text;
             string Password_textbox1 = textBox2.Text;
-
+            string Access_level = "NULL";
             // Проверка логина и пароля
             bool Checker = false;
             Checker = Check_pass(Login_textbox1, Password_textbox1);
             if (Checker == true)
             {
                 // Запускаем экран загрузки. 
-                Thread t = new Thread(() => StartSplashScreen(Login_textbox1, Password_textbox1));
-                t.Start();
-                Thread.Sleep(5000);
-                t.Abort();
+                Access_level = StartSplashScreen(Login_textbox1, Password_textbox1);
                 this.BringToFront();
             }
             else
@@ -94,34 +94,62 @@ namespace Project1
                 textBox2.Clear();
             }
 
-
-        }
-        public void StartSplashScreen(string Login_textbox1, string Password_textbox1)
-        {
-            string Access_level;
-            Application.Run(new FormSplashScreen());
-
-            // Проверяем уровень допуска пользователя
-            string sqlcheck = "SELECT Login_in.Access_level FROM Login_in WHERE Login_in.Login = " + Login_textbox1 + " AND Login_in.Password = " + Password_textbox1 + ";";
-
-            Access_level = "administrator";
-
             // В соответствии с уровнем допуска запускаем определённую форму
-            switch(Access_level)
+            switch (Access_level)
             {
                 // Открываем форму Администратора
                 case "administrator":
-                    MessageBox.Show("Тут должна вывестись форма администратора.");
+                    // Запуск админской формы
+                    AdminForm formadmin = new AdminForm();
+                    formadmin.Show();
                     break;
                 case "user":
-                    MessageBox.Show("Тут должна вывестись форма пользователя системы.");
+                    // Запуск админской формы
+                    UserForm formuser = new UserForm();
+                    formuser.Show();
                     break;
                 default:
                     MessageBox.Show("Ваш статус в системе не установлен. Обратитесь к администратору.");
                     break;
-
-
             }
+        }
+
+        // Фунция проверки доступа пользователя к системе
+        public string Check_Login(string Login_textbox1, string Password_textbox1)
+        {
+            // Обьявляем переменную в которую мы положим результат запроса о статусе пользователя в системе
+            string Access_level;
+            // Подключаем Базу Данных PostgreSQL через Npgsql
+            NpgsqlConnection npgSqlConnection = new NpgsqlConnection(connectionString);
+            npgSqlConnection.Open();
+
+            // Проверяем уровень допуска пользователя
+            string check_access_level = "SELECT Login_in.Access_level FROM Login_in WHERE Login_in.Login = '" + Login_textbox1 + "' AND Login_in.Password = '" + Password_textbox1 + "';";
+            // Выполняем запрос к Базе Данных
+            NpgsqlCommand npgSqlCommand = new NpgsqlCommand(check_access_level, npgSqlConnection);
+            // Записываем ответ в переменную.
+            Access_level = npgSqlCommand.ExecuteScalar().ToString();
+
+            // Закрываем соединение с Базой данных
+            npgSqlConnection.Close();
+
+            // Возвращаем статус пользователя
+            return Access_level;
+        }
+
+        public string StartSplashScreen(string Login_textbox1, string Password_textbox1)
+        {
+            string Access_level;
+
+            // Запуск проверки логина, пароля, роли в системе
+            Access_level = Check_Login(Login_textbox1, Password_textbox1);
+
+            // Запуск экрана загрузки
+            FormSplashScreen f = new FormSplashScreen();
+            f.ShowDialog();
+
+            // Возвращаем уровень допуска
+            return Access_level;
         }
 
         public void MainForm_FormClosed(object sender, FormClosedEventArgs e)

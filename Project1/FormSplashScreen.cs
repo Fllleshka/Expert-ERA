@@ -15,12 +15,15 @@ namespace Project1
         public FormSplashScreen()
         {
             InitializeComponent();
-            this.BringToFront();
         }
         private void Timer1_Tick(object sender, EventArgs e)
         {
             progressBar1.Increment(1);
-            if (progressBar1.Value == 100) timer1.Stop();
+            if (progressBar1.Value == 100)
+            {
+                timer1.Stop();
+                this.Hide();
+            }
         }
     }
 }
