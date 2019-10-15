@@ -101,12 +101,17 @@ namespace Project1
                 case "administrator":
                     // Запуск админской формы
                     AdminForm formadmin = new AdminForm();
+                    // Выводим админскую форму на первый план
                     formadmin.Show();
+                    // Скрываем форму с логином и паролем
+                    this.Hide();
                     break;
                 case "user":
-                    // Запуск админской формы
+                    // Запуск формы пользователя
                     UserForm formuser = new UserForm();
                     formuser.Show();
+                    // Закрываем форму с логином и паролем
+                    this.Close();
                     break;
                 default:
                     MessageBox.Show("Ваш статус в системе не установлен. Обратитесь к администратору.");
