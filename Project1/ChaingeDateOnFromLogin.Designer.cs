@@ -37,9 +37,11 @@
             // 
             // dataGridView1
             // 
+            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(6, 19);
             this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.Size = new System.Drawing.Size(748, 174);
             this.dataGridView1.TabIndex = 0;
             // 
@@ -51,7 +53,7 @@
             this.groupBox1.Size = new System.Drawing.Size(760, 199);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Пользователи зарегистрированны в системе";
+            this.groupBox1.Text = "Пользователи, которые зарегистрированны в системе";
             // 
             // ChaingeDateOnFromLogin
             // 

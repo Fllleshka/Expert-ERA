@@ -24,8 +24,6 @@ namespace Project1
             // Запускаем форму для изменения таблиц FIO и Login_in
             ChaingeDateOnFromLogin FormChangeDate = new ChaingeDateOnFromLogin();
             FormChangeDate.ShowDialog();
-            this.Close();
-
         }
 
         private void AdminForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -34,6 +32,11 @@ namespace Project1
             MainForm form = new MainForm();
             form.Show();
             form.BringToFront();
+        }
+
+        private void AdminForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

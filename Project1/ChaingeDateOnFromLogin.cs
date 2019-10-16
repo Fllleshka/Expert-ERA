@@ -25,7 +25,7 @@ namespace Project1
             AdminForm formadmin = new AdminForm();
             formadmin.Show();
             formadmin.BringToFront();
-            this.Close();
+            //this.Close();
         }
 
         private void ChaingeDateOnFromLogin_Load(object sender, EventArgs e)
@@ -42,12 +42,23 @@ namespace Project1
             // Выполняем запрос к Базе Данных
             NpgsqlCommand npgSqlCommand = new NpgsqlCommand(check_access_level, npgSqlConnection);
 
-            //
+            // Инициализируем адаптер для вывода результата запроса из БД
             NpgsqlDataAdapter adapter = new NpgsqlDataAdapter(npgSqlCommand);
             DataTable table = new DataTable();
+            // Кидаем результат запроса в таблицу
             adapter.Fill(table);
+            // Выводим результат запроса в dataGridView
             dataGridView1.DataSource = table;
+            // Блокируем dataGridView чтобы пользователь не наломал дров в таблице
             dataGridView1.ReadOnly = true;
+
+            // Изменяем название столбцов для удобного прочтения
+            dataGridView1.Columns[0].HeaderText = "Логин";
+            dataGridView1.Columns[1].HeaderText = "Уровень доступа";
+            dataGridView1.Columns[2].HeaderText = "Пароль";
+            dataGridView1.Columns[3].HeaderText = "Фамилия";
+            dataGridView1.Columns[4].HeaderText = "Имя";
+            dataGridView1.Columns[5].HeaderText = "Отчество";
 
             // Закрываем соединение с Базой данных
             npgSqlConnection.Close();

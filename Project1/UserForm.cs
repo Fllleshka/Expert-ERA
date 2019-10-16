@@ -16,5 +16,18 @@ namespace Project1
         {
             InitializeComponent();
         }
+
+        private void UserForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void UserForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            // При закрытии формы должна запускаться форма входа в систему.
+            MainForm form = new MainForm();
+            form.Show();
+            form.BringToFront();
+        }
     }
 }

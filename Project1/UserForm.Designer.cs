@@ -44,6 +44,8 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "СЧ НИР \"Эксперт-ЭРА\" Форма Пользователя";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.UserForm_FormClosing);
+            this.Load += new System.EventHandler(this.UserForm_Load);
             this.ResumeLayout(false);
 
         }

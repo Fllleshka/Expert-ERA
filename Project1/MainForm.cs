@@ -88,7 +88,6 @@ namespace Project1
             }
             else
             {
-                MessageBox.Show("Логин или пароль не верны.");
                 // Отчистка textBox2 с паролем.
                 textBox2.Text = "";
                 textBox2.Clear();
@@ -109,9 +108,10 @@ namespace Project1
                 case "user":
                     // Запуск формы пользователя
                     UserForm formuser = new UserForm();
+                    // Выводим форму для пользователя на первый план
                     formuser.Show();
-                    // Закрываем форму с логином и паролем
-                    this.Close();
+                    // Скрываем форму с логином и паролем
+                    this.Hide();
                     break;
                 default:
                     MessageBox.Show("Ваш статус в системе не установлен. Обратитесь к администратору.");

@@ -58,6 +58,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "СЧ НИР \"Эксперт-ЭРА\" Форма Администратора";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AdminForm_FormClosing);
+            this.Load += new System.EventHandler(this.AdminForm_Load);
             this.ResumeLayout(false);
 
         }
