@@ -33,13 +33,13 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.button1 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.button2 = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.button2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -92,6 +92,16 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Добавление нового пользователя";
             // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(124, 101);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(110, 31);
+            this.button2.TabIndex = 4;
+            this.button2.Text = "Отчистить";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.Button2_Click);
+            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -139,15 +149,6 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(152, 20);
             this.textBox1.TabIndex = 0;
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(124, 101);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(110, 31);
-            this.button2.TabIndex = 4;
-            this.button2.Text = "Отчистить";
-            this.button2.UseVisualStyleBackColor = true;
             // 
             // ChaingeDateOnFromLogin
             // 

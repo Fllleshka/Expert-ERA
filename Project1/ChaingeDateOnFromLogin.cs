@@ -18,6 +18,23 @@ namespace Project1
             InitializeComponent();
         }
 
+        public string generate_login(string Surname, string Name, string Middlename)
+        {
+            // Строка для подключения к БД.
+            String connectionString = "Server=localhost;Port=5432;User Id=postgres;Password=1q2w3e4r;Database=Expert_ERA;";
+
+            // Подключаем Базу Данных PostgreSQL через Npgsql
+            NpgsqlConnection npgSqlConnection = new NpgsqlConnection(connectionString);
+            npgSqlConnection.Open();
+
+            // Переменная для сгенерируемого логина
+            string login;
+
+            login = Surname + "_" + Name + "_" + Middlename;
+
+            return login;
+        }
+
         private void ChaingeDateOnFromLogin_FormClosed(object sender, FormClosedEventArgs e)
         {
             // При закрытии формы открываем предыдущюю (Админскую форму)
@@ -72,6 +89,8 @@ namespace Project1
             string Surname_textbox1 = textBox1.Text;
             string Name_textbox2 = textBox2.Text;
             string Middlename_textbox3 = textBox3.Text;
+            string Login;
+            string Password;
 
             // Тут должна быть проверка на корректность входящих значений
             // Нужно ли тут это? Или понадеятся что администратор всё будет вводить корректно.
@@ -85,6 +104,10 @@ namespace Project1
             // Подключаем Базу Данных PostgreSQL через Npgsql
             NpgsqlConnection npgSqlConnection = new NpgsqlConnection(connectionString);
             npgSqlConnection.Open();
+
+            // Запускаем фенкцию генерации логина
+            Login = generate_login(Surname_textbox1, Name_textbox2, Middlename_textbox3);
+
 
             // Строка запроса для определения последнего номера в таблице, для формирования запроса к БД
             string text_max_id_fio = "SELECT MAX(ID_FIO) FROM FIO";
@@ -102,6 +125,13 @@ namespace Project1
 
             // Обновить таблицу DataGridView
 
+        }
+
+        private void Button2_Click(object sender, EventArgs e)
+        {
+            textBox1.Text = "";
+            textBox2.Text = "";
+            textBox3.Text = "";
         }
     }
 }
