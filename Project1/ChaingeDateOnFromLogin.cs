@@ -20,13 +20,6 @@ namespace Project1
 
         public string generate_login(string Surname, string Name, string Middlename)
         {
-            // Строка для подключения к БД.
-            String connectionString = "Server=localhost;Port=5432;User Id=postgres;Password=1q2w3e4r;Database=Expert_ERA;";
-
-            // Подключаем Базу Данных PostgreSQL через Npgsql
-            NpgsqlConnection npgSqlConnection = new NpgsqlConnection(connectionString);
-            npgSqlConnection.Open();
-
             // Переменная для сгенерируемого логина
             string login;
 
@@ -48,7 +41,7 @@ namespace Project1
         private void ChaingeDateOnFromLogin_Load(object sender, EventArgs e)
         {
             // Строка для подключения к БД.
-            String connectionString = "Server=localhost;Port=5432;User Id=postgres;Password=1q2w3e4r;Database=Expert_ERA;";
+            String connectionString = "Server=localhost;Port=5432;User Id=postgres;Password=123;Database=Expert_ERA;";
 
             // Подключаем Базу Данных PostgreSQL через Npgsql
             NpgsqlConnection npgSqlConnection = new NpgsqlConnection(connectionString);
@@ -99,30 +92,21 @@ namespace Project1
             //Chainge_textbox(Middlename_textbox3);
 
             // Строка для подключения к БД.
-            String connectionString = "Server=localhost;Port=5432;User Id=postgres;Password=1q2w3e4r;Database=Expert_ERA;";
+            String connectionString = "Server=localhost;Port=5432;User Id=postgres;Password=123;Database=Expert_ERA;";
 
             // Подключаем Базу Данных PostgreSQL через Npgsql
             NpgsqlConnection npgSqlConnection = new NpgsqlConnection(connectionString);
             npgSqlConnection.Open();
 
-            // Запускаем фенкцию генерации логина
-            Login = generate_login(Surname_textbox1, Name_textbox2, Middlename_textbox3);
-
-
-            // Строка запроса для определения последнего номера в таблице, для формирования запроса к БД
-            string text_max_id_fio = "SELECT MAX(ID_FIO) FROM FIO";
-            NpgsqlCommand npgSqlCommand = new NpgsqlCommand(text_max_id_fio, npgSqlConnection);
-            // Записываем ответ в переменную.
-            string result_max_id_fio = npgSqlCommand.ExecuteScalar().ToString();
-            // Преобразовываем переменную в int а так же прибавляем 1 для продолжения нумерации. Про автоинкримент ничего не знаю!Ы
-            int result = Convert.ToInt32(result_max_id_fio) + 1;
-
             // Строка запроса для вставки в БД данных с формы
-            string insert_into_FIO = "INSERT INTO FIO (Id_fio, First_name, Second_name, Surname) VALUES('" + result + "', '" + Surname_textbox1 + "', '" + Name_textbox2 + "', '" + Middlename_textbox3 + "');";
-            npgSqlCommand = new NpgsqlCommand(insert_into_FIO, npgSqlConnection);
-            result_max_id_fio = npgSqlCommand.ExecuteNonQuery().ToString();
-            MessageBox.Show(result_max_id_fio);
+            string insert_into_FIO = "INSERT INTO FIO (First_name, Second_name, Surname) VALUES('" + Surname_textbox1 + "', '" + Name_textbox2 + "', '" + Middlename_textbox3 + "');";
+            // Записываем ФИО в таблицу FIO
+            NpgsqlCommand npgSqlCommand = new NpgsqlCommand(insert_into_FIO, npgSqlConnection);
+            // Генерируем логин
+            Login = generate_login(Surname_textbox1, Name_textbox2, Middlename_textbox3);
+            // Генерируем пароль
 
+            //Связываем сгенерируемые логин и пароль в таблицу и связываем с ФИО
             // Обновить таблицу DataGridView
 
         }

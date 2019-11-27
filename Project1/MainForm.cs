@@ -15,7 +15,7 @@ namespace Project1
     public partial class MainForm : Form
     {
         // Глобальная переменная для подключения к БД.
-        String connectionString = "Server=localhost;Port=5432;User Id=postgres;Password=1q2w3e4r;Database=Expert_ERA;";
+        String connectionString = "Server=localhost;Port=5432;User Id=postgres;Password=123;Database=Expert_ERA;";
 
         public MainForm()
         {
