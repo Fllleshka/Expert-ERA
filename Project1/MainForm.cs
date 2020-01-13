@@ -163,6 +163,7 @@ namespace Project1
             NpgsqlConnection npgSqlConnection = new NpgsqlConnection(connectionString);
             // Закрываем соединение с Базой данных
             npgSqlConnection.Close();
+
         }
     }
 }

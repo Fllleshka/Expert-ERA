@@ -23,7 +23,7 @@ namespace Project1
             // Переменная для сгенерируемого логина
             string login;
 
-            login = Surname + "_" + Name + "_" + Middlename;
+            login = Surname + "_" + Name[0] + Middlename[0];
 
             return login;
         }
@@ -72,6 +72,13 @@ namespace Project1
 
             // Закрываем соединение с Базой данных
             npgSqlConnection.Close();
+
+            // Загружаем в элемент ComboBox элементы выбора типа учётной записи
+                comboBox1.Items.Add("administrator");
+                comboBox1.Items.Add("user");
+
+            // Заставляем выделять пользователя всю строку вместо одной ячейки
+            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
 
         }
 
