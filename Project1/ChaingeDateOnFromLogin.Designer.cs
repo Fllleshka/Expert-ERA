@@ -57,6 +57,7 @@
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
+            this.textBox9 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -97,6 +98,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.textBox9);
             this.groupBox2.Controls.Add(this.button2);
             this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.Controls.Add(this.button1);
@@ -169,6 +171,7 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(152, 20);
             this.textBox1.TabIndex = 0;
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // groupBox3
             // 
@@ -328,6 +331,13 @@
             this.label5.TabIndex = 2;
             this.label5.Text = "Имя (30 знаков)";
             // 
+            // textBox9
+            // 
+            this.textBox9.Location = new System.Drawing.Point(240, 49);
+            this.textBox9.Name = "textBox9";
+            this.textBox9.Size = new System.Drawing.Size(128, 20);
+            this.textBox9.TabIndex = 6;
+            // 
             // ChaingeDateOnFromLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -343,7 +353,7 @@
             this.Name = "ChaingeDateOnFromLogin";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "ч";
+            this.Text = "СЧ НИР \"Эксперт-ЭРА\" Форма изменения пользователей";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ChaingeDateOnFromLogin_FormClosed);
             this.Load += new System.EventHandler(this.ChaingeDateOnFromLogin_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
@@ -389,5 +399,6 @@
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.TextBox textBox9;
     }
 }
